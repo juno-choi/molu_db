@@ -1,0 +1,25 @@
+version: "3"
+services:
+  db:
+    build: .
+    container_name: db
+    environment:
+      MYSQL_DATABASE: 'molu'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - 3306:3306
+    # Where our data will be persisted
+    volumes:
+      - molu_db:/var/lib/mysql
+      - molu_db:/var/lib/mysql-files
+    networks:
+      - net
+
+volumes:
+  molu_db:
+
+networks:
+  net:
+    driver: bridge
